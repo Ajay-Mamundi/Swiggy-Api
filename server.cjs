@@ -58,6 +58,49 @@ app.get('/get-restaurant-details', async function(request, response) {
     }
 })
 
+// app.delete('/delete-restaurant-detail',async function(request,response){
+//    try{
+//     const res=await Restaurant.findByIdAndDelete(request.params.id)
+//     if(restaurant){
+//     const res=await Restaurant.findByIdAndDelete(request.params.id)
+//     response.status(200).json({
+//         "status" : "success",
+//         "message" : "deleted"
+//     })}
+// }catch(error){
+//     response.status(500).json({
+//         "status" : "failure",
+//         "message" : "could not deleted"
+//     })
+//      }
+// })
+
+
+app.delete('/delete-restaurant-detail/:id', async function(request, response) {
+    try {
+        const restaurant = await Restaurant.findById(request.params.id)
+        if(restaurant) {
+            await Restaurant.findByIdAndDelete(request.params.id)
+            response.status(200).json({
+                "status" : "success",
+                "message" : "deleted successfully"
+            })
+        } else { //restaurant : null
+            response.status(404).json({
+                "status" : "failure",
+                "message" : "entry not found"
+            })
+        }
+    } catch(error) {
+        response.status(500).json({
+            "status" : "failure",
+            "message" : "could not delete",
+            "error" : error
+        })
+    }
+}) 
+
+
 app.post('/create-new-user', async function(request, response) {
     try {
          await Users.create({
