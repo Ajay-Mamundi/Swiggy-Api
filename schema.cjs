@@ -16,6 +16,9 @@ const restaurantSchema = new mongoose.Schema({
         type : Array
 
     },
+    imageLink :{
+         type:String
+    },
     name: {
         type : String
 
