@@ -47,7 +47,7 @@ app.post('/add-restaurant', async function(request, response) {
 
 app.get('/get-restaurant-details', async function(request, response) {
     try {
-        const restaurantDetails = await Restaurant.findOne()
+        const restaurantDetails = await Restaurant.find()
         response.status(200).json(restaurantDetails)
     } catch(error) {
         response.status(500).json({
